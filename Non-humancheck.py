@@ -2,8 +2,12 @@ import numpy as np
 import pandas as pd
 import os
 
-box = pd.read_csv("C:/Users/JackJSC/Desktop/Coding/AI_builder/HumanDetector/challenge-2019-validation-detection-bbox.csv")
-human_d = pd.read_csv("C:/Users/JackJSC/Desktop/Coding/AI_builder/HumanDetector/challenge-2019-validation-detection-human-imagelabels.csv")
+#path to human parts detecting label
+boxy = pd.read_csv("/path/label.csv")
+#path to picture
+pic_folder = os.fsencode("path/to/picture/picture.jpeg")
+#path to human detecting label
+human_d = pd.read_csv("/path/human_detection_label.csv")
 ibox = box.index
 not_human = []
 for i in human_d.index:
@@ -15,11 +19,11 @@ for y in not_human:
         box.drop(x,axis=0,inplace=True)        
 
 
-box.to_csv("C:/Users/JackJSC/Desktop/Coding/AI_builder/HumanDetector/output/challenge-2019-validation-detection-bbox.csv")
-human_d.to_csv("C:/Users/JackJSC/Desktop/Coding/AI_builder/HumanDetector/output/challenge-2019-validation-detection-human-imagelabels.csv")
+box.to_csv("/path/label.csv")
+human_d.to_csv("/path/human_detection_label.csv")
 
 for y in not_human:
-    inhuman = "C:/Users/JackJSC/Desktop/Coding/AI_builder/HumanDetector/validation/" + y + ".jpg"
+    inhuman = "/path/to/picture/" + y + ".jpg"
     try:
         os.remove(inhuman)
     except:
