@@ -56,23 +56,24 @@ class DetectorAPI:
         self.default_graph.close()
 
 
-model_path = "C:/Users/JackJSC/Desktop/Coding/AI_builder/HumanDetector/faster_rcnn_inception_v2_coco_2018_01_28/frozen_inference_graph.pb"
+model_path = "/path/faster_rcnn_inception_v2_coco_2018_01_28/frozen_inference_graph.pb"
 odapi = DetectorAPI(path_to_ckpt=model_path)
 threshold = 0.8
 line_op = 0.5
 img_array = []
 start_time = time.time()
-#head,leg,arm
+#id of human parts detection(head,leg,arm)
 human_parts = ["/m/04hgtk", "/m/035r7c", "/m/0dzf4"]
-boxy = pd.read_csv("C:/Users/JackJSC/Desktop/Coding/AI_builder/HumanDetector/challenge-2019-validation-detection-bbox.csv")
-human_d = pd.read_csv("C:/Users/JackJSC/Desktop/Coding/AI_builder/HumanDetector/challenge-2019-validation-detection-human-imagelabels.csv")
-pic_folder = os.fsencode("C:/Users/JackJSC/Desktop/Coding/AI_builder/HumanDetector/validation/")
+#path to label
+boxy = pd.read_csv("/path/label.csv")
+#path to picture
+pic_folder = os.fsencode("path/to/picture/picture.jpeg")
 total_acc = []
 
 for img_file in os.listdir(pic_folder):
     pic_name = os.fsdecode(img_file)
     pic_code = pic_name[:-4]
-    img = cv2.imread("C:/Users/JackJSC/Desktop/Coding/AI_builder/HumanDetector/validation/" + pic_name)
+    img = cv2.imread("path/to/picture/" + pic_name)
     size = (1280,720) 
     relavent = boxy[boxy["ImageID"]==pic_code]
     relavent = relavent[boxy["LabelName"]=="/m/04hgtk"].combine_first(relavent[boxy["LabelName"]=="/m/035r7c"].combine_first(relavent[boxy["LabelName"]=="/m/0dzf4"]))
