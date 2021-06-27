@@ -57,11 +57,11 @@ class DetectorAPI:
         self.default_graph.close()
 
 
-model_path = "C:/Users/JackJSC/Desktop/Coding/AI_builder/HumanDetector/faster_rcnn_inception_v2_coco_2018_01_28/frozen_inference_graph.pb"
+model_path = "/path/faster_rcnn_inception_v2_coco_2018_01_28/frozen_inference_graph.pb"
 odapi = DetectorAPI(path_to_ckpt=model_path)
 threshold = 0.8
 line_op = 0.5
-cap = cv2.VideoCapture("C:/Users/JackJSC/Desktop/Coding/AI_builder/HumanDetector/input/video.avi")
+cap = cv2.VideoCapture("/path/input/video.avi")
 img_array = []
 a_b = []
 start_time = time.time()
@@ -119,8 +119,8 @@ while True:
       end_time = time.time()
       print("Total Elapsed Time:", end_time-start_time)
       break
-out = cv2.VideoWriter('C:/Users/JackJSC/Desktop/Coding/AI_builder/HumanDetector/output/o_video.avi',cv2.VideoWriter_fourcc(*'DIVX'), 15, size)
-Distant_output.to_csv("C:/Users/JackJSC/Desktop/Coding/AI_builder/HumanDetector/output/distant_output.csv")
+out = cv2.VideoWriter('/path/output/o_video.avi',cv2.VideoWriter_fourcc(*'DIVX'), 15, size)
+Distant_output.to_csv("/path/output/distance_output.csv")
 for i in range(len(img_array)):
     out.write(img_array[i])
 out.release()
